@@ -1,0 +1,75 @@
+so loc phat la so chi chua 6,8.mot so loc phat x dgl so loc phat chan neu:
++ chi chua 6 8
++ so chu so la chan
++ doi xung
+Liet ke n so loc phat tu be den lon
+Constraints:1<=t<=100  1<=n<=10^4;
+input:
+1
+4
+output:
+66 88 6666 6886
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i+=1)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+string s;
+int final;
+vector<string> res;
+void ktao(int i)
+{
+	my_for(j,0,i) s+='6';
+}
+void sinh()
+{
+	int i=s.size()-1;
+	while(i>=0&&s[i]=='8')
+	{
+		s[i]='6';
+		i-=1;
+	}
+	if(i==-1) final=0;
+	else
+	{
+		s[i]='8';
+	}
+}
+void init()
+{
+	my_for(i,1,14)
+	{
+	
+		s="";
+		final=1;
+		ktao(i);
+		while(final)
+		{	
+			string tmp=s;
+			reverse(tmp.begin(),tmp.end());
+			string a=s+tmp;
+			res.push_back(a);
+			sinh();
+			}	
+		}
+		
+	}
+
+anonymous()
+{
+	vinh
+	int t;cin>>t;
+	init();
+	while(t--)
+	{
+		int n;cin>>n;
+		my_for(i,0,n) cout<<res[i]<<" ";
+		cout<<endl;
+	}
+
+}
+

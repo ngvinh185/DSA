@@ -1,0 +1,76 @@
+Nhiệm vụ của bạn là hãy liệt kê các xâu nhị phân thuận nghịch có độ dài chẵn
+theo thứ tự từ điển với chiều dài không quá n kí tự.
+Input Format
+Dòng duy nhất chứa số nguyên N.
+Constraints
+2<=N<=30
+Output Format
+In ra các xâu nhị phân đối xứng có độ dài chẵn theo thứ tự từ điển.
+Sample Input 0
+4
+Sample Output 0
+00
+0000
+0110
+1001
+11
+1111
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n;string a;int final;
+void ktao(int i)
+{
+	my_for(j,1,i+1) a+='0';
+}
+void sinh()
+{
+	int i=a.size()-1;
+	while(i>=0&&a[i]=='1')
+	{
+		a[i]='0';
+		i--;
+	}
+	if(i==-1) final=0;
+	else
+	{
+		a[i]='1';	
+	} 
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	vector<string> d;
+	my_for(i,1,16)
+	{
+		a="";
+		ktao(i);
+		final=1;
+		while(final)
+		{
+			string tmp=a;
+			reverse(tmp.begin(),tmp.end());
+			d.push_back(a+tmp);
+			sinh();
+		}
+	}	
+	vector<string>res;
+	foreach(x,d)
+	{
+		if(x.size()<=n) res.push_back(x);
+		else break;
+	}
+	sort(res.begin(),res.end());
+	foreach(x,res)
+	{
+		if(x.size()<=n) cout<<x<<endl;
+		else break;
+	}
+}

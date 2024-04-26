@@ -1,0 +1,51 @@
+Cho mảng số nguyên gồm N phần tử, các phần tử trong mảng không quá 100.
+Hãy liệt kê các hoán vị của các phần tử khác nhau trong mảng theo thứ tự ngược.
+
+Input Format
+Dòng đầu tiên là N; Dòng thứ 2 là các phần tử trong mảng;
+Constraints
+1<=N<=15;
+Output Format
+In ra các hoán vị ngược của các phần tử khác nhau trong mảng.
+Sample Input 0
+2
+1 2
+Sample Output 0
+2 1
+1 2
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n;bool used[100];int hv[100],a[100];
+void btk(int i)
+{
+	my_for(j,1,n+1)
+	{
+		if(used[j]==0)
+		{
+			hv[i]=j;
+			used[j]=1;
+			if(i==n) 
+			{
+				my_for(u,1,n+1) cout<<a[hv[u]]<<" ";
+				cout<<endl;
+			}
+			else
+				btk(i+1);
+			used[j]=0;
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	my_for(i,1,n+1) cin>>a[i];
+	btk(1);
+}

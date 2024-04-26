@@ -1,0 +1,62 @@
+chon k ptu trong n phtu . hoi trong cau hinh ke tiep co bn ptu khac voi cac ptu cua cau hinh trc do 
+input:
+6 4
+1 2 3 4
+output:
+1
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+
+void sinh(int a[],int n,int k,int &final)
+{
+	int i=k;
+	while(i>=1&&a[i]==n-k+i)
+	{
+		i--;
+	}
+	if(i==0) final=1;
+	else
+	{
+		a[i]+=1;
+		my_for(j,i+1,k+1)
+		{
+			a[j]=a[j-1]+1;
+		}
+	}
+}
+int ktra(set<int> d,int k,int a[])
+{
+	int dem=0;
+	my_for(i,1,k+1) 
+	{
+		if(d.count(a[i])) dem+=1;
+	}
+	return k-dem;
+}
+anonymous()
+{
+	vinh
+	int n,k;cin>>n>>k;
+	int a[k+1],final=0;
+	set<int> d;
+	my_for(i,1,k+1) 
+	{
+		cin>>a[i];
+		d.insert(a[i]);
+	}
+	sinh(a,n,k,final);
+	if(final==1) 
+	{
+		cout<<k;
+	}
+	else cout<<ktra(d,k,a);
+	
+	
+}

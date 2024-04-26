@@ -1,0 +1,66 @@
+There are n apples with known weights. Your task is to divide the apples into two groups so that the difference between the weights of the groups is minimal.
+Input
+The first input line has an integer n: the number of apples.
+The next line has n integers p_1,p_2,\dots,p_n: the weight of each apple.
+Output
+Print one integer: the minimum difference between the weights of the groups.
+Constraints
+
+1 < n < 20
+1 < pi < 10^9
+
+Example
+Input:
+5
+3 2 7 4 1
+
+Output:
+1
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n,a[100],res[100],final=1;
+void ktao()
+{
+	my_for(i,1,n+1) res[i]=0;
+}
+void sinh()
+{
+	int i=n;
+	while(i>=1&&res[i]==1)
+	{
+		res[i]=0;
+		i-=1;
+	}
+	if (i==0) final=0; 
+	else
+	{
+		res[i]=1;
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	my_for(i,1,n+1) cin>>a[i];
+	ktao();
+	int min_dif=1e9;
+	while(final)
+	{
+		int s1=0,s2=0;
+		my_for(i,1,n+1)
+		{
+			if(res[i]==1) s1+=a[i];
+			else s2+=a[i];
+		}
+		min_dif=min(min_dif,abs(s1-s2));
+		sinh();
+	}
+	cout<<min_dif;
+}

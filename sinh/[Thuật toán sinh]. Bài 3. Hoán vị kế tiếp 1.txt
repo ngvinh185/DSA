@@ -1,0 +1,61 @@
+Cho số tự nhiên N, bạn được cung cấp một hoán vị của N phần tử từ 1 tới N.
+Nhiệm vụ của bạn là sinh ra hoán vị kế tiếp của hoán vị được cho, nếu hoán vị
+được cho là hoán vị cuối cùng thì yêu cầu in ra hoán vị đầu tiên.
+Input Format
+Dòng đầu tiên là số tự nhiên N. Dòng thứ 2 là các số tự nhiên trong hoán vị hiện
+tại.
+Constraints
+1<=N<=1000;
+Output Format
+In ra hoán vị kế tiếp trên một dòng.
+Sample Input 0
+6
+3 1 5 6 2 4
+Sample Output 0
+3 1 5 6 4 2
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int a[500],n,final=0;
+void sinh()
+{
+	int i=n-1;
+	while(i>=1&&a[i]>a[i+1])
+	{
+		i--;
+	}
+	if(i==0)
+	{
+		final=1;
+	}
+	else
+	{
+		my_For(j,n,i+1)
+		{
+			if(a[j]>a[i])
+			{
+				swap(a[j],a[i]);
+				break;
+			}
+		}
+		reverse(a+i+1,a+n+1);
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	my_for(i,1,n+1) cin>>a[i];
+	sinh();
+	if(final==1) my_for(j,1,n+1) cout<<j;
+	else 
+	{
+		my_for(i,1,n+1) cout<<a[i]<<" ";
+	}
+}

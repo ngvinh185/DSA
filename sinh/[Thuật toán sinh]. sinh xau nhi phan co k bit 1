@@ -1,0 +1,56 @@
+in ra xau nhi phan n phan tu va co k bit 1
+input:
+3 2
+output:
+0 1 1
+1 0 1
+1 1 0
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int a[100];
+int final=0;
+int n,k;
+int dem=0;
+void ktao()
+{
+	my_for(i,1,n+1) a[i]=0;
+}
+void sinh()
+{
+	int i=n;
+	while(i>=1 && a[i]==1)
+	{
+		a[i]=0;
+		dem-=1;
+		i--;
+	}
+	if(i==0) final=1;
+	else
+	{
+		a[i]=1;
+		dem+=1;
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n>>k;
+	ktao();
+	while(final==0)
+	{
+		if(dem==k)
+		{
+			my_for(i,1,n+1) cout<<a[i]<<" ";
+			cout<<endl;
+		}
+		sinh();
+	}
+}

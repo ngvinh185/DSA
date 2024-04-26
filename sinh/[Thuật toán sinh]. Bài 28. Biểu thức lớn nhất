@@ -1,0 +1,63 @@
+Cho 4 số nguyên X, Y, Z, T. Nhiệm vụ của bạn là tìm giá trị lớn nhất của biểu thức
+X o1 Y o2 Z o3 T, trong đó o1, o2, o3 có thể là các dấu +, -.
+Input Format
+Dòng duy nhất gồm 4 số X, Y, Z, T
+Constraints
+-10^5<=X,Y,Z,T<=10^4
+Output Format
+In ra giá trị lớn nhất của biểu thức
+Sample Input 0
+59 71 80 -3
+Sample Output 0
+213
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n;int a[100],final;
+void ktao()
+{
+	my_for(i,1,n+1) a[i]=0;
+}
+void sinh()
+{
+	int i=n;
+	while(i>=1&&a[i]==1)
+	{
+		a[i]=0;
+		--i;
+	}
+	if(i==0) final=0;
+	else
+	{
+		a[i]=1;
+	}
+}
+anonymous()
+{
+	vinh
+	int m;cin>>m;
+	n=m-1;
+	int b[m+1] ;
+  ktao();
+	my_for(i,1,m+1) cin>>b[i];
+	final=1;
+	int res=-1e9;
+	while(final)
+	{
+		int sum=b[1];
+		my_for(i,1,n+1)
+		{
+			if(a[i]==0) sum+=b[i+1];
+			else sum-=b[i+1];
+		}
+		res=max(res,sum);
+		sinh();
+	}
+	cout<<res;
+}

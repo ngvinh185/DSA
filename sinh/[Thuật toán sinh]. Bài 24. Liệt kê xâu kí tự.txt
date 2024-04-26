@@ -1,0 +1,56 @@
+Cho chữ cái c in hoa và số nguyên K; Hãy tìm cách liệt kê tất cả các xâu có K ký
+tự khác nhau được tạo ra bởi các chữ cái tính từ ‘A’ đến ký tự c. Các ký tự được
+phép lặp lại nhưng không tính các xâu là hoán vị của xâu nào đó đã liệt kê trước
+đó.
+Input Format
+Chữ cái c và K
+Constraints
+'A' < c <='H'; 0 < K < (c – ‘A’);
+Output Format
+Ghi ra lần lượt các xâu ký tự kết quả theo thứ tự từ điển trên từng dòng.
+Sample Input 0
+C 2
+Sample Output 0
+AA
+
+AB
+AC
+BA
+BB
+BC
+CA
+CB
+CC
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+char c[100];int n;char res;
+void ql(int i)
+{
+	my_for(j,'A',res+1)
+	{
+		c[i]=j;
+		if(i==n)
+		{
+			my_for(l,1,i+1) cout<<c[l];
+			cout<<endl;
+		}
+		else
+		{
+			ql(i+1);
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>res>>n;
+	ql(1);
+}

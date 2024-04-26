@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+//  --0/1 knapsack prime--
+int s,n,w[100],v[100],a[100],res=-1e9;
+void ql(int i,int totalWeight,int totalValue)
+{
+	if(totalWeight>s) return;
+	my_for(j,0,2)
+	{
+		a[i]=j;
+		if(i==n)
+		{
+			if(a[i]==1) 
+			{
+				totalWeight+=w[i];
+				totalValue+=v[i];
+			}
+			if(totalWeight<=s) res=max(res,totalValue);
+		}
+		else
+		{
+			if(a[i]==1) ql(i+1,totalWeight+w[i],totalValue+v[i]);
+			else ql(i+1,totalWeight,totalValue);
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n>>s;
+	my_for(i,1,n+1) cin>>w[i];
+	my_for(i,1,n+1) cin>>v[i];
+	ql(1,0,0);
+	cout<<res;
+}

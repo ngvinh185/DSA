@@ -1,0 +1,73 @@
+cho mang A n phan tu . liet ke cac tap con K phan tu cua A
+1<=n<=k<=10
+input:
+8 3
+1 2 2 2 1 3 2 5
+output:
+1 2 3
+1 2 5
+1 3 5
+2 3 5
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n,k;
+string a[505];int d[50],final=1;
+void ktao()
+{
+	my_for(i,1,k+1) d[i]=i;
+}
+void sinh()
+{
+	int i=k;
+	while(i>=1&&d[i]==n-k+i)
+	{
+		--i;
+	}
+	if(i==0) final=0;
+	else
+	{
+		d[i]+=1;
+		my_for(j,i+1,k+1)
+		{
+			d[j]=d[j-1]+1;
+		}
+	}
+}
+
+anonymous()
+{
+	vinh
+	cin>>n;
+	cin>>k;
+	string b[n];
+	my_for(i,0,n) 
+	{
+		cin>>b[i];
+	}
+	sort(b,b+n);
+	a[1]=b[0];
+	int index=2;
+	my_for(i,1,n)
+	{
+		if(b[i]!=b[i-1])
+		{
+			a[index++]=b[i];
+		}
+	}
+	n=index-1;
+	sort(a+1,a+n+1);
+	ktao();
+	while(final)
+	{
+		my_for(i,1,k+1) cout<<a[d[i]]<<" ";
+		cout<<endl;
+		sinh();
+	}
+}

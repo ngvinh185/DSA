@@ -1,0 +1,53 @@
+cho mtran cap n*n va K
+viet chg trinh lay moi hang moi cot 1 phan tu sao cho tong = k
+input:
+3 10
+2 4 3
+1 3 6
+4 2 4
+output:
+2 //so cach thoa man
+1 3 2
+3 2 1
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+anonymous()
+{
+	vinh
+	int n,k;cin>>n>>k;
+	int mt[n+1][n+1];
+	my_for(i,1,n+1)
+	{
+		my_for(j,1,n+1) cin>>mt[i][j];
+	}
+	int a[n+1];
+	my_for(i,1,n+1) a[i]=i;
+	vector<string> d;
+	do
+	{
+		int sum=0;
+		my_for(i,1,n+1)
+		{
+			sum+=mt[i][a[i]];	
+		}	
+		if(sum==k) 
+		{
+			string s;
+			my_for(i,1,n+1)
+			{
+				s+=to_string(a[i]);
+				s+=' ';
+			}
+			d.push_back(s);
+		}
+	}while(next_permutation(a+1,a+n+1));
+	cout<<d.size()<<endl;
+	foreach(x,d) cout<<x<<endl;
+}

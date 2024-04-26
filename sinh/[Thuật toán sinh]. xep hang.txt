@@ -1,0 +1,44 @@
+dua ra cac cach sap xep sv vao 1 hang ngang
+input:
+3
+Nam Lan Phi
+output:
+Lan Nam Phi
+Lan Phi Nam
+Nam Lan Phi
+Nam Phi Lan
+Phi Lan Nam
+Phi Nam Lan
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int d[100];
+string a[100];
+int n;
+void ktao()
+{
+	my_for(i,1,n+1) d[i]=i;
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	ktao();
+	my_for(i,1,n+1) cin>>a[i];
+	sort(a+1,a+n+1);
+	do
+	{
+		my_for(i,1,n+1)
+		{
+			cout<<a[d[i]]<<" ";
+		}
+		cout<<endl;
+	}while(next_permutation(d+1,d+n+1));
+
+}

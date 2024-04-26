@@ -1,0 +1,126 @@
+Trong 8 chữ cái Tiếng Anh đầu tiên (ABCDEFGH) thì có 2 nguyên âm là ‘A’, ‘E’,
+còn lại là phụ âm. Người ta muốn ghép các chữ cái bắt đầu từ chữ cái ‘A’ cho đến
+chữ cái c (‘D’ <= c <= ‘H’) sao cho mỗi chữ cái được sử dụng đúng một lần và
+xâu kết quả không có nguyên âm nào bị kẹp giữa bởi hai phụ âm. Hãy liệt kê các
+xâu thỏa mãn theo thứ tự từ điển.
+Input Format
+Chỉ có một dòng ghi chữ cái c
+Constraints
+'D' <= c <= 'H'
+Output Format
+Liệt kê các xâu thỏa mãn, mỗi xâu trên một dòng.
+Sample Input 0
+D
+Sample Output 0
+ABCD
+ABDC
+ACBD
+ACDB
+ADBC
+ADCB
+BCDA
+BDCA
+CBDA
+CDBA
+DBCA
+DCBA
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+bool check(string s)
+{
+	my_for(i,1,s.size()-1)
+	{
+		if(s[i]=='A'||s[i]=='E')
+		{
+			if(s[i-1]!='A'&&s[i+1]!='A'&&s[i-1]!='E'&&s[i-1]!='E') return false;
+		}
+	}
+	return true;
+}
+anonymous()
+{
+	vinh
+	char c;
+	cin>>c;
+	string s;
+	my_for(i,'A',c+1)
+	{
+		s+=(char)i;
+	}
+	do
+	{
+		if(check(s))
+		{
+			cout<<s<<endl;
+		}
+	}while(next_permutation(s.begin(),s.end()));
+}
+
+cach khac:
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n;char c;
+vector<string> res,b;
+char a[100];int daxet[100],d[100];
+void ql1(int i)
+{
+	my_for(j,'A',c+1)
+	{
+		if(daxet[j]==0)
+		{
+			a[i]=j;
+			daxet[j]=1;
+			if(i==n)
+			{
+				string tmp="";
+				my_for(l,1,i+1) tmp+=a[l];
+				res.push_back(tmp);
+			}
+			else ql1(i+1);
+			daxet[j]=0;
+		}
+	}
+}
+void ql2(int i)
+{
+	my_for(j,1,n+1)
+	{
+		d[i]=j;
+		if(i==n) 
+		{
+			string tmp="";
+			my_for(l,1,i+1) tmp+=to_string(d[l]); 
+			b.push_back(tmp);
+		}
+		else ql2(i+1);
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	c=n-1+'A';
+	ql1(1);ql2(1);
+	foreach(x,res)
+	{
+		foreach(y,b)
+		{
+			cout<<x+y<<endl;
+		}
+	}
+}

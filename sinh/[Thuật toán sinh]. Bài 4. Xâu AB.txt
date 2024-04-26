@@ -1,0 +1,76 @@
+Nhiệm vụ của bạn ở bài tập này là sinh ra các xâu chỉ bao gồm 2 kí tự A và B theo
+thứ tự từ điển giảm dần.
+Input Format
+Dòng duy nhất chứa số nguyên dương N là độ dài của xâu.
+Constraints
+1<=N<=10;
+Output Format
+In ra các xâu AB, mỗi xâu được in trên 1 dòng.
+Sample Input 0
+3
+Sample Output 0
+BBB
+BBA
+BAB
+BAA
+ABB
+ABA
+AAB
+AAA
+
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int a[100];
+int final=0;
+int n;
+void ktao()
+{
+	my_for(i,1,n+1) a[i]=0;
+}
+void sinh()
+{
+	int i=n;
+	while(i>=1 && a[i]==1)
+	{
+		a[i]=0;
+		i--;
+	}
+	if(i==0) final=1;
+	else
+	{
+		a[i]=1;
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	vector<vector<int>> d;
+	ktao();
+	while(final==0)
+	{
+		vector<int> tmp(a+1,a+n+1); 
+		d.push_back(tmp);
+		sinh();
+	}
+	my_For(i,d.size()-1,0)
+	{
+		foreach(x,d[i]) 
+		{
+			if(x==1) cout<<"B";
+			else cout<<"A";
+		}
+		cout<<endl;
+	}
+	
+	
+		
+}
