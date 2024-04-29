@@ -1,0 +1,69 @@
+Cho n thành phố đánh số từ 1 đến n và các tuyến đường giao thông hai chiều
+giữa chúng, mạng lưới giao thông này được cho bởi mảng C[1...n, 1...n] ở đây C[i]
+[j] = C[j][i] là chi phí đi đoạn đường trực tiếp từ thành phố i đến thành phố j. Một
+người du lịch xuất phát từ thành phố 1, muốn đi thăm tất cả các thành phố còn lại
+mỗi thành phố đúng 1 lần và cuối cùng quay lại thành phố 1. Hãy chỉ ra chi phí ít
+nhất mà người đó phải bỏ ra.
+Input Format
+Dòng đầu tiên là số nguyên n – số thành phố; n dòng sau, mỗi dòng chứa n số
+nguyên thể hiện cho mảng 2 chiều C.
+Constraints
+
+1<=N<=15; 0<=C[i][j]<=100;
+Output Format
+In ra chi phí mà người đó phải bỏ ra
+Sample Input 0
+4
+0 85 26 81
+85 0 77 97
+26 77 0 26
+81 97 26 0
+Sample Output 0
+234
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n, c[100][100],visited[100],x[100],res=1e9,cmin=INT_MAX;
+void ql(int i,int sum)
+{
+	my_for(j,1,n+1)
+	{
+		if(visited[j]==0)
+		{
+			x[i]=j;
+			visited[j]=1;
+			if(i==n) 
+			{
+				res=min(res,sum+c[x[i-1]][j]+c[1][x[n]]);
+			}
+			else if(sum+(n-i+1)*cmin<res)
+			{
+				ql(i+1,sum+c[x[i-1]][j]);
+			}
+			visited[j]=0;
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	my_for(i,1,n+1)
+	{
+		my_for(j,1,n+1) 
+		{
+			cin>>c[i][j];
+			if(c[i][j]) cmin=min(cmin,c[i][j]);
+		}
+	}
+	x[1]=1;
+	visited[1]=1;
+	ql(2,0);
+	cout<<res;
+}

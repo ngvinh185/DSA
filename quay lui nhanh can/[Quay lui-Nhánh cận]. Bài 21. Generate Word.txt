@@ -1,0 +1,96 @@
+Cho một bảng HCN cỡ N hàng, M cột, mỗi ô trên HCN chứa 1 chữ cái in hoa hoặc
+chữ số. Một từ có thể được xây dựng từ các chữ cái của các ô liền kề theo thứ tự,
+trong đó các ô liền kề nằm cạnh nhau theo chiều ngang hoặc chiều dọc. Không
+được sử dụng cùng một ô chữ cái nhiều lần. Bạn hãy xác định xem có thể tạo
+thành từ S cho trước hay không ?
+
+Input Format
+ Dòng đầu tiên là N và M
+ N dòng tiếp theo mô tả bảng HCN
+ Dòng cuối cùng là từ S
+Constraints
+ 1<=N,M<=5
+
+ 1<=len(S)<=25
+Output Format
+ In ra YES nếu có thể tạo được từ S, ngược lại in NO
+Sample Input 0
+4 4
+ACAC
+28B5
+1TE5
+ABCH
+28TECH
+Sample Output 0
+YES
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+char a[100][100];int n,m;string s;int check=0;string tmp="";
+int dx[]={0,0,-1,1};
+int dy[]={1,-1,0,0};
+int visited[100][100];
+void ql(int i,int j)
+{
+	if(tmp==s)
+	{
+		check=1;return;
+	}
+	if(check==0)
+	{
+		my_for(k,0,4)
+		{
+			int i1=i+dx[k],j1=j+dy[k];	
+			if(i1>=0&&i1<n&&j1>=0&&j1<m)
+			{
+				if(visited[i1][j1]==0)
+				{
+					tmp+=a[i1][j1];
+					visited[i1][j1]=1;
+					if(tmp==s) 
+					{
+						check=1; return ;
+					}
+					else if(s.find(tmp)!=string::npos) ql(i1,j1); //branch of bound
+					tmp.pop_back();
+					visited[i1][j1]=0;
+				}
+				
+			}
+		}	
+	}
+	
+}
+anonymous()
+{
+	vinh
+	cin>>n>>m;
+	my_for(i,0,n)
+	{
+		my_for(j,0,m) cin>>a[i][j];
+	}
+	cin>>s;
+	my_for(i,0,n)
+	{
+		my_for(j,0,m) 
+		{
+			if(a[i][j]==s[0])
+			{
+				tmp="";
+				tmp+=a[i][j];
+				visited[i][j]=1;
+				ql(i,j);
+				if(check) cout<<"YES";
+				return 0;
+			}	
+		}	
+	}
+	
+	cout<<"NO";
+}

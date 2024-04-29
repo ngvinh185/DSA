@@ -1,0 +1,50 @@
+Cho N sợi dây, biết chi phí nối 2 sợ dây là tổng độ dài của 2 sợi dây đó. Nhiệm vụ
+của bạn là nối N sợi dây này thành 1 sao cho chi phí nối dây là nhỏ nhất
+Input Format
+Dòng 1 chứa số nguyên N; Dòng 2 chứa N số nguyên là độ dài các sợ dây
+Constraints
+1<=N<=10^5; Các sợi dây có độ dài không quá 10^5;
+
+Output Format
+In ra chi phí nối dây tối thiểu
+Sample Input 0
+7
+7 7 6 10 4 8 3
+Sample Output 0
+124
+Sample Input 1
+4
+4 3 2 6
+Sample Output 1
+29
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+anonymous()
+{
+	vinh
+	int n;cin>>n;
+	priority_queue<int,vector<int>,greater<int>> q;
+	my_for(i,0,n) 
+	{
+		int x;cin>>x;
+		q.push(x);
+	}
+	int res=0;
+	while(q.size()>1)
+	{
+		int a=q.top();
+		q.pop();
+		int b=q.top();
+		q.pop();
+		res+=a+b;
+		q.push(a+b);	
+	}	
+	cout<<res;
+}

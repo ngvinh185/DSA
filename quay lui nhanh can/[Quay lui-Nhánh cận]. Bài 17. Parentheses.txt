@@ -1,0 +1,68 @@
+Bạn hãy sinh ra các biểu thức dấu ngoặc hợp lệ từ các cặp dấu ngoặc "()", "[]",
+"{}" có độ dài N. Kết quả được in ra theo thứ tự từ điển tăng dần, nếu không tồn
+tại biểu thức hợp lệ thỏa mãn thì in ra NOT FOUND
+Input Format
+ Dòng duy nhất chứa số nguyên N
+Constraints
+ 2<=N<=15
+Output Format
+ In ra đáp án của bài toán
+Sample Input 0
+2
+Sample Output 0
+
+() [] {}
+Sample Input 1
+4
+Sample Output 1
+(()) ()() ()[] (){} ([]) ({}) [()] [[]] []() [][] []{} [{}] {()}
+{[]} {{}} {}() {}[] {}{}
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+string s="([{)]}";int n;char x[100]; vector<string> res;
+bool check(string s)
+{
+	stack<char> st;
+	Foreach(x,s)
+	{
+		if(x=='('||x=='['||x=='{') st.push(x);
+		else
+		{
+			if(st.empty()) return false;
+			char y=st.top();
+			if(x==')'&&y!='('||x=='}'&&y!='{'||x==']'&&y!='[') return false;
+			st.pop();
+		}
+	}
+	if(st.empty()==0) return false;
+	return true; 
+}
+void ql(int i)
+{
+	my_for(j,0,6)
+	{
+		x[i]=s[j];
+		if(i==n) 
+		{
+			string s="";
+			my_for(u,1,i+1) s+=x[u];
+			if(check(s)) res.push_back(s);
+		}
+		else ql(i+1);
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	ql(1);
+	sort(res.begin(),res.end());
+	foreach(x,res) cout<<x<<" ";
+}

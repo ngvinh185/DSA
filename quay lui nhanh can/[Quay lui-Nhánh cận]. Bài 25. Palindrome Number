@@ -1,0 +1,63 @@
+Cho một số nguyên dương N có không quá 16 chữ số, bạn được phép tách các
+chữ số của N thành các số nhỏ hơn và phải đảm bảo các số tách được đều là số
+thuận nghịch, bạn cũng ko được phép đảo thứ tự các chữ số của N. Hãy in ra mọi
+cách tách như vậy.
+Input Format
+ Dòng duy nhất chứa N
+Constraints
+ 1<=N<=10^16
+Output Format
+In ra các cách tách N thành các số nhỏ thuận nghịch nhỏ hơn
+Sample Input 0
+282882
+Sample Output 0
+2 8 2 8 8 2
+2 8 2 88 2
+2 8 2882
+2 828 8 2
+282 8 8 2
+282 88 2
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+string s;
+vector<vector<string>> d;
+vector<string> v;
+bool check(string t)
+{
+	string tmp=t;
+	reverse(tmp.begin(),tmp.end());
+	return tmp==t;
+}
+void ql(int start)
+{
+	if(start>=s.size()) d.push_back(v);
+	my_for(end,start,s.size())
+	{
+		if(check(s.substr(start,end-start+1)))
+		{
+			v.push_back(s.substr(start,end-start+1));
+			ql(end+1);
+			v.pop_back();
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>s;
+	ql(0);
+	foreach(x,d) 
+	{
+		foreach(y,x) cout<<y<<" ";	
+		cout<<endl;
+	}	
+
+}
+

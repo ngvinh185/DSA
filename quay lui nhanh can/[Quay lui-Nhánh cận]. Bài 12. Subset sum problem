@@ -1,0 +1,63 @@
+Cho mảng A[] gồm n phần tử, hãy xác định xem có thể chia mảng A[] thành 2 tập
+sao cho tổng của 2 tập bằng nhau hay không?
+Input Format
+Dòng đầu tiên là số nguyên n; Dòng thứ 2 gồm n số nguyên của mảng A[]
+Constraints
+1<=n<=20; 1<=A[i]<=100;
+Output Format
+In ra 1 nếu có thể chia mảng thành 2 phần bằng nhau, ngược lại in 0.
+Sample Input 0
+5
+9 9 4 4 5
+Sample Output 0
+0
+Sample Input 1
+4
+1 2 3 4
+Sample Output 1
+1
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int a[100],n,x[100],s,check=0;
+void ql(int i,int pos,int sum)
+{
+	if(sum>s/2) return ;
+//	if(check==1) return ;
+	my_for(j,pos,n+1)
+	{
+		x[i]=a[j];
+		if(sum+x[i]==s/2)
+		{
+			check=1;
+			return ;
+		}
+		else 
+		{
+			ql(i+1,j+1,sum+x[i]);
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	s=0;
+	my_for(i,1,n+1) 
+	{
+		cin>>a[i];
+		s+=a[i];
+	}
+	if(s%2==1)
+	{
+		cout<<0;
+		return 0;
+	}
+	ql(1,1,0);cout<<check;
+}

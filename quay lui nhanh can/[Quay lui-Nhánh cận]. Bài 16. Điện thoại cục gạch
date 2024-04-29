@@ -1,0 +1,62 @@
+Cho xâu kí tự S chỉ bao gồm các số từ 2 tới 9, mỗi chữ số này trên bàn phím của
+điện thoại cục gạch tương ứng với 3 chữ cái như trong hình bên dưới. Bạn hãy in
+ra các xâu kí tự có thể tạo thành bằng cách ấn mỗi chữ số trong xâu S đúng 1
+lần. Bạn hãy in ra các xâu kết quả theo thứ tự từ điển tăng dần.
+
+Input Format
+ Dòng duy nhất chứa xâu S
+Constraints
+ 2<=len(S)<=9
+ Các kí tự trong S là khác nhau
+Output Format
+ In ra các xâu thỏa mãn
+Sample Input 0
+23
+Sample Output 0
+ad ae af bd be bf cd ce cf
+Sample Input 1
+2
+Sample Output 1
+a b c
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+map<int,string> d;int n;string s;char x[100];
+void ql(int i)
+{
+	my_for(j,0,d[i+1].size())
+	{
+		x[i]=d[i+1][j];
+		if(i==n)
+		{
+			string tmp;
+			my_for(u,1,i+1) tmp+=x[u];
+			cout<<tmp<<" ";
+		}
+		else
+		{
+			ql(i+1);
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>s;
+	n=s.size();
+	d[2] = "abc";
+	d[3] = "def";
+	d[4] = "ghi";
+	d[5] = "jkl";
+	d[6] = "mno";
+	d[7] = "pqrs";
+	d[8] = "tuv";
+	d[9] = "wxyz";
+	ql(1);
+}

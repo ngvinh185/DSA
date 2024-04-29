@@ -1,0 +1,52 @@
+Cho xâu kí tự S gồm N chữ cái khác nhau, hãy liệt kê tổ hợp lặp chập K của N kí
+tự trên và in ra theo thứ tự từ điển tăng dần.
+Input Format
+ Dòng 1 chứa 2 số nguyên N và K
+ Dòng 2 chứa xâu S
+Constraints
+1<=K<=N<=15
+Output Format
+ In ra đáp án của bài toán
+Sample Input 0
+4 2
+ABCD
+Sample Output 0
+
+AA
+AB
+AC
+AD
+BB
+BC
+BD
+CC
+CD
+DD
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+string s;int n,k;string tmp;
+void ql(int pos)
+{
+	my_for(j,pos,n)
+	{
+		tmp+=s[j];
+		if(tmp.size()==k) cout<<tmp<<endl;
+		else ql(j);
+		tmp.pop_back();
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n>>k;
+	cin>>s;
+	ql(0);
+}

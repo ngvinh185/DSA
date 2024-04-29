@@ -1,0 +1,50 @@
+Cho số tự nhiên K và xâu ký tự các chữ số S. Nhiệm vụ của bạn là đưa ra số lớn
+nhất bằng cách thực hiện nhiều nhất K lần đổi chỗ các ký tự trong S. Ví dụ K =3
+và S = “1234567” ta được “7654321”.
+Input Format
+1234567 3
+Constraints
+1<=K<=10; 1<=len(S)<=8;
+Output Format
+7654321
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+string s;int k;string res;
+void ql(int i,string tmp,int cnt)
+{
+	res=max(res,tmp);
+	if(cnt>=k||i>tmp.size()) return ; //khong tu dung dc phai co them i>tmp.size() vi khi i>tmp.size() no se khong nhay vao vong for nao ma luon nhay vao cau lenh 20
+	char cmax=tmp[i];
+	my_for(j,i+1,tmp.size())
+	{
+		cmax=max(cmax,tmp[j]);
+	}
+	if(cmax==tmp[i]) ql(i+1,tmp,cnt);
+	else
+	{
+		my_for(j,i+1,tmp.size())
+		{
+			if(tmp[j]==cmax)
+			{
+				string _tmp=tmp;
+				swap(_tmp[j],_tmp[i]);
+				ql(i+1,_tmp,cnt+1);
+			}
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>s>>k;
+	ql(0,s,0);
+	cout<<res;
+}

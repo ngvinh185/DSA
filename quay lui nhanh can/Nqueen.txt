@@ -1,0 +1,36 @@
+x[i]=j // hang i chon cot j
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int x[100],n,doc[100],cheo1[100],cheo2[100];
+void ql(int i)
+{
+	my_for(j,1,n+1)
+	{
+		if(doc[j]==0&&cheo1[i-j+n]==0&&cheo2[i+j-1]==0)
+		{
+			x[i]=j;
+			doc[j]=1;cheo1[i-j+n]=1;cheo2[i+j-1]=1;
+			if(i==n) 
+			{
+				my_for(v,1,i+1) cout<<x[v]<<" ";
+				cout<<endl;
+			}
+			else ql(i+1);
+			doc[j]=0;cheo1[i-j+n]=0;cheo2[i+j-1]=0;
+		}
+		
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	ql(1);
+}

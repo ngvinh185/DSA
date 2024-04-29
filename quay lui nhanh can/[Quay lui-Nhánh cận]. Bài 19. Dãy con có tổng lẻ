@@ -1,0 +1,101 @@
+Cho mảng A[] gồm N phần tử, liệt kê các tập con (giữ đúng thứ tự trước sau) của
+mảng A[] có tổng các phần tử là số lẻ, mỗi phần tử chỉ được lấy 1 lần. Chú ý nếu
+2 tập hợp chứa 2 phần tử có giá giống nhau nhưng ở vị trí khác nhau thì được tính
+2 tập hợp khác nhau.
+Input Format
+ Dòng 1 là N : số lượng phần tử trong mảng
+ Dòng 2 gồm N số trong mảng A[]
+Constraints
+ 2 <= N <= 15
+ 1 <= A[i] <= 1000
+Output Format
+ In ra các tập con thỏa mãn theo thứ tự từ điển tăng dần, nếu không tồn tại
+dãy con in ra NOT FOUND
+Sample Input 0
+4
+9 7 9 9
+Sample Output 0
+7
+7 9 9
+9
+9
+9
+9 7 9
+9 7 9
+9 9 9
+Sample Input 1
+6
+3 5 4 5 4 2
+Sample Output 1
+3
+3 2
+3 4
+3 4
+3 4 2
+3 4 2
+3 4 4
+3 4 4 2
+
+3 5 4 5
+3 5 4 5 2
+3 5 4 5 4
+3 5 4 5 4 2
+3 5 5
+3 5 5 2
+3 5 5 4
+3 5 5 4 2
+4 5
+4 5 2
+4 5 4
+4 5 4 2
+5
+5
+5 2
+5 2
+5 4
+5 4
+5 4
+5 4 2
+5 4 2
+5 4 2
+5 4 4
+5 4 4 2
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int x[100],a[100],n;vector<string> d;
+void ql(int i,int pos,int sum)
+{
+	my_for(j,pos,n+1)
+	{
+		x[i]=a[j];
+		sum+=a[j];
+		if(sum%2==1)
+		{
+			string s="";
+			my_for(u,1,i+1) 
+			{
+				s+=to_string(x[u]);
+				if(u<i) s+=" ";
+			}
+			d.push_back(s);
+		}
+		ql(i+1,j+1,sum);
+		sum-=x[i];
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	my_for(i,1,n+1) cin>>a[i];
+	ql(1,1,0);
+	sort(d.begin(),d.end()) ;
+	foreach(x,d) cout<<x<<endl;
+}

@@ -1,0 +1,78 @@
+Cho một mê cung được mô tả dưới dạng một ma trận nhị phân có N hàng và N
+cột. Một con chuột bắt đầu tử ô (1, 1) và muốn di chuyển tới ô (N, N). Con chuột
+chỉ được di chuyển xuống dưới hoặc sang phải và chỉ được di chuyển tới ô nào đó
+nếu ô đó có giá trị là 1. Bạn hãy in ra các cách đi hợp lệ của con chuột, trong đó
+nếu con chuột đi sang phải thì nước đi được mô tả là chữ R, và nếu con chuột đi
+xuống dưới thì nước đi được mô tả là chữ D. Nếu con chuột không thể đi xuống ô
+(N, N) thì in ra -1. Chú ý trên mỗi đường đi con chuột chỉ có thể đi qua 1 ô nào đó
+đúng 1 lần.
+Input Format
+Dòng thứ nhất đưa vào N; N dòng tiếp theo mỗi dòng gồm N số;
+Constraints
+1<=N<=12; Dữ liệu đảm bảo ô (1, 1) là số 1.
+
+Output Format
+Đưa ra các đường đi hợp lệ theo thứ tự từ điển tăng dần trên từng dòng.
+Sample Input 0
+4
+1 1 0 1
+1 1 1 1
+1 0 1 1
+1 1 1 1
+Sample Output 0
+DDDRRR
+DRRDDR
+DRRDRD
+DRRRDD
+RDRDDR
+RDRDRD
+RDRRDD
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int a[100][100],n;string s;
+string path="RD";
+void ql(int i,int j)
+{	
+	if(i==n&&j==n) 
+	{
+		cout<<s<<endl;
+	}
+	else
+	{
+		int dx[]={0,1};
+		int dy[]={1,0};
+		my_for(k,0,2)
+		{
+			int i1=i+dx[k],j1=j+dy[k];
+			if(i1>=1&&i1<=n&&j1>=1&&j1<=n&&a[i1][j1]==1)
+			{
+				a[i1][j1]=0;
+				s+=path[k];
+				ql(i1,j1);
+				a[i1][j1]=1;
+				s.pop_back();
+			}	
+		}			
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	my_for(i,1,n+1)
+	{
+		my_for(j,1,n+1)
+		{
+			cin>>a[i][j];
+		}
+	}
+	ql(1,1);
+}

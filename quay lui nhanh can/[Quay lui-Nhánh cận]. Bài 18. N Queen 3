@@ -1,0 +1,70 @@
+Vẫn là bài toán N quân hậu, nhiệm vụ của bạn là hãy in ra các cách xếp quân hậu
+trên bàn cờ cỡ N * N. Trong đó với mỗi ô trên bàn cờ có quân hậu chiếm chỗ sẽ
+đại diện là chữ Q, ngược lại ô trống sẽ là dấu '.'
+Input Format
+ Dòng duy nhất chứa N là kích cỡ bàn cờ
+Constraints
+ 1<=N<=10
+Output Format
+ In ra các cách xếp quân hậu, mỗi cách xếp cách nhau một dòng trống
+Sample Input 0
+4
+Sample Output 0
+.Q..
+...Q
+Q...
+..Q.
+..Q.
+Q...
+...Q
+.Q..
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+int n,cheo1[100],cheo2[100],x[100],doc[100];
+void ql(int i)
+{
+	my_for(j,1,n+1)
+	{
+		if(cheo1[i-j+n]==0&&cheo2[i+j-1]==0&&doc[j]==0)
+		{
+			x[i]=j;
+			cheo1[i-j+n]=1;cheo2[i+j-1]=1;doc[j]=1;
+			if(i==n)
+			{
+				int k=1;
+				my_for(u,1,n+1)
+				{
+					my_for(v,1,n+1)
+					{
+						if(u==k&&x[k]==v)
+						{
+							cout<<"Q";
+							k+=1;
+						}
+						else cout<<".";
+					}
+					cout<<endl;
+				}
+				cout<<endl;
+			}
+			else
+			{
+				ql(i+1);
+			}
+			cheo1[i-j+n]=0;cheo2[i+j-1]=0;doc[j]=0;
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n;
+	ql(1);
+}

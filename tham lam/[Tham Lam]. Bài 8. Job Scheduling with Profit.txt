@@ -1,0 +1,71 @@
+Cho N công việc. Mỗi công việc được biểu diễn như một bộ 3 số nguyên dương ,
+trong đó JobId là mã của việc, Deadline là thời gian kết thúc của việc, Profit là lợi
+nhuận đem lại nếu hoàn thành việc đó đúng thời gian. Thời gian để hoàn toàn
+mỗi công việc là 1 đơn vị thời gian. Hãy cho biết lợi nhuận lớn nhất có thể thực
+hiện các việc với giả thiết mỗi việc được thực hiện đơn lẻ.
+
+struct job{
+int id, deadline, profit;
+};
+
+Input Format
+Dòng thứ 1 chứa số nguyên dương N; N dòng tiếp theo mô tả id, deadline, profit
+của N công việc
+Constraints
+1<=N<=10^5; 1<=JobID<=N; 1<=Deadline<=N; 1<=Profit<=1000;
+Output Format
+In ra lợi nhuận lớn nhất
+Sample Input 0
+4
+1 4 20
+2 1 10
+3 1 40
+4 1 30
+Sample Output 0
+60
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define Foreach(x,a) for(auto &x:a)
+using namespace std;
+struct job{
+int id, deadline, profit;
+};
+bool cmp(job a,job b)
+{
+	return a.deadline>b.deadline;
+}
+anonymous()
+{
+	vinh
+	int n;cin>>n;
+	job a[n];
+	my_for(i,0,n)
+	{
+		cin>>a[i].id>>a[i].deadline>>a[i].profit;
+	}
+	sort(a,a+n,cmp);
+	priority_queue<int> q;
+	int cur_time=a[0].deadline; // luu cong viec co profit cao nhat co the dc lam tai thoi diem do
+	int index=0;
+	int res=0;
+	while(cur_time>=1)
+	{
+		while(index<n&&a[index].deadline>=cur_time)
+		{
+			q.push(a[index].profit);
+			index+=1;
+		}
+		if(q.empty()==0) 
+		{
+			res+=q.top();
+			q.pop();
+		}
+		cur_time-=1;
+	}
+	cout<<res;
+}

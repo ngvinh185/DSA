@@ -1,0 +1,64 @@
+Cho mảng các số nguyên A[] gồm N phần tử. Hãy chia mảng số nguyên A[] thành
+K tập con khác rỗng sao cho tổng các phần tử của mỗi tập con đều bằng nhau.
+Mỗi phần tử thuộc tập con xuất hiện duy nhất một lần trong tất cả các tập con. Ví
+dụ với A[] = {2, 1, 4, 5, 6}, K =3 ta có kết quả {2, 4}, {1, 5}, {6}.
+Input Format
+Dòng thứ nhất là hai số N và K; Dòng tiếp theo đưa vào N số của mảng A[]; các số
+được viết cách nhau một vài khoảng trống.
+Constraints
+1≤N, K≤20; 0≤A[i]≤100.
+Output Format
+Đưa ra 1 nếu có thể chia tập con thành K tập thỏa mãn yêu cầu bài toán, ngược
+lại đưa ra 0
+Sample Input 0
+6 4
+82 43 38 38 18 61
+Sample Output 0
+
+0(NO)
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+int a[100],x[100],n,k,s,used[100],cnt=0;
+void ql(int i,int pos,int sum)
+{
+	if(sum>s) return ;
+	my_for(j,pos,n+1)
+	{
+		if(used[j]==0)
+		{
+			x[i]=j;
+			sum+=a[j];
+			if(sum==s)
+			{
+				my_for(u,1,i+1) used[x[u]]=1;
+				my_for(u,1,i+1) cout<<a[x[u]]<<" ";
+				cout<<endl;
+				cnt+=1;
+				return ;
+			}
+			else ql(i+1,j+1,sum);
+			sum-=a[j];
+		}
+	}
+}
+anonymous()
+{
+	vinh
+	cin>>n>>k;
+	my_for(i,1,n+1) 
+	{
+		cin>>a[i];
+		s+=a[i];
+	}
+	s/=k;
+	ql(1,1,0);
+	if(cnt==k) cout<<"YES";
+	else cout<<"NO";
+}

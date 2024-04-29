@@ -1,0 +1,88 @@
+Một máy ATM hiện có n (n ≤ 30) tờ tiền có giá trị t[1], t[2], ..., t[n]. Hãy tìm cách
+trả ít tờ nhất với số tiền đúng bằng S (các tờ tiền có giá trị bất kỳ và có thể bằng
+nhau, mỗi tờ tiền chỉ được dùng một lần).
+Input Format
+Dòng 1 gồm 2 số nguyên n và S (S ≤ 10^9). Dòng thứ hai chứa n số nguyên t[1],
+t[2], ..., t[n] (t[i] ≤ 10^9)
+Constraints
+1<=N<=30; 1<=S<=10^9; 1<=t[i]<=10^9;
+Output Format
+In ra số tờ tiền ít nhất phải trả, nếu không thể tìm được ra kết quả thì in -1.
+Sample Input 0
+6 30
+10 4 10 5 8 8
+Sample Output 0
+4
+----------c1 hay hon c2----------
+c1:
+  #include <bits/stdc++.h>
+  #define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+  #define anonymous main
+  #define int long long
+  #define my_for(i,a,b) for(int i=a;i<b;i++)
+  #define my_For(i,a,b) for(int i=a;i>=b;i--)
+  #define foreach(x,a) for(auto x:a)
+  #define Foreach(x,a) for(auto &x:a)
+  using namespace std;
+  int a[100],n,x[100],sum,s,cnt=1e9;
+  void ql(int i,int pos,int sum)
+  {
+    my_for(j,pos,n+1)
+    {
+      if(sum+a[j]<=s)
+      {
+        x[i]=a[j];
+        if(sum+a[j]==s) 
+        {
+          cnt=min(cnt,i);
+        }
+        else ql(i+1,j+1,sum+a[j]);
+      }
+      else return ;
+    }
+  }
+  anonymous()
+  {
+    vinh
+    cin>>n>>s;
+    my_for(i,1,n+1) cin>>a[i];
+    sort(a,a+n);
+    ql(1,1,0);
+    cout<<cnt;
+  }
+c2:
+  #include <bits/stdc++.h>
+  #define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+  #define anonymous main
+  #define int long long
+  #define my_for(i,a,b) for(int i=a;i<b;i++)
+  #define my_For(i,a,b) for(int i=a;i>=b;i--)
+  #define foreach(x,a) for(auto x:a)
+  #define Foreach(x,a) for(auto &x:a)
+  using namespace std;
+  int a[100],n,x[100],sum,s,cnt=1e9;
+  void ql(int i,int pos,int sum)
+  {
+    my_for(j,pos,n+1)
+    {
+      x[i]=a[j];
+      sum+=a[j];
+      if(sum==s)
+      {
+        cnt=min(cnt,i);
+      }
+      else if(sum<s)
+      {
+        ql(i+1,j+1,sum);
+      }
+      sum-=a[j];
+    }
+  }
+  anonymous()
+  {
+    vinh
+    cin>>n>>s;
+    my_for(i,1,n+1) cin>>a[i];
+    ql(1,1,0);
+    cout<<cnt;
+  }
