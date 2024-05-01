@@ -1,0 +1,38 @@
+Cho xâu kí tự S chỉ bao gồm các kí tự in thường, hãy kiểm tra xem có thể sắp đặt
+lại các kí tự trong xâu sao cho không có 2 kí tự kề nhau nào giống nhau hay
+không?
+Input Format
+Dòng duy nhất chứa xâu S
+Constraints
+1<=len(S)<=10000;
+
+Output Format
+Nếu có thể sắp đặt lại xâu kí tự in ra YES, ngược lại in ra NO.
+Sample Input 0
+aqeaaqwq
+Sample Output 0
+YES
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+anonymous()
+{
+	vinh
+	int d[256]={0};
+	string s;cin>>s;
+	int max_fre=-1e9;
+	foreach(x,s)
+	{
+		d[x]+=1;
+		max_fre=max(max_fre,d[x]);
+	}
+	int n=s.size();
+	if(max_fre<=(n-1)/2+1) cout<<"YES";
+	else cout<<"NO";
+}

@@ -1,0 +1,48 @@
+Hoàng yêu thích các số may mắn. Ta biết rằng một số là số may mắn nếu biểu
+diễn thập phân của nó chỉ chứa các chữ số may mắn là 4 và 7. Ví dụ, các số 47,
+744, 4 là số may mắn và 5, 17, 467 không phải. Hoàng muốn tìm số may mắn bé
+nhất có tổng các chữ số bằng n. Hãy giúp anh ấy
+Input Format
+Dòng duy nhất chứa số nguyên dương n
+Constraints
+1<=n<=10^6;
+Output Format
+In ra đáp án của bài toán, nếu không tồn tại đáp án thì in ra -1
+Sample Input 0
+16
+Sample Output 0
+4444
+Sample Input 1
+14
+Sample Output 1
+77
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+//#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+anonymous()
+{
+	vinh
+	int sum;cin>>sum;
+	int d4=-1,d7;
+	for(d7=sum/7;d7>=0;d7--)
+	{
+		if ((sum-d7*7)%4==0) 
+		{
+			d4=(sum-d7*7)/4;
+			break;
+		}	
+	} 
+	if(d4!=-1) 
+	{
+		my_for(i,0,d4) cout<<4;
+		my_for(i,0,d7) cout<<7;
+	}
+	else cout<<-1;
+}

@@ -1,0 +1,13 @@
+https://www.hackerrank.com/challenges/largest-permutation/problem
+You are given an unordered array of unique integers incrementing from 1. You can swap any two elements a limited number of times. Determine the largest lexicographical value array that can be created by executing no more than the limited number of swaps.
+Sample Input 0
+
+STDIN Function
+
+---
+
+5 1 n = 5, k = 1
+4 2 3 5 1 arr = [4, 2, 3, 5, 1]
+Sample Output 0
+
+5 2 3 4 1

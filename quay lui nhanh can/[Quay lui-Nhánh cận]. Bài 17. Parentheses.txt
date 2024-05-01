@@ -35,7 +35,7 @@ bool check(string s)
 		if(x=='('||x=='['||x=='{') st.push(x);
 		else
 		{
-			if(st.empty()) return false;
+			
 			char y=st.top();
 			if(x==')'&&y!='('||x=='}'&&y!='{'||x==']'&&y!='[') return false;
 			st.pop();

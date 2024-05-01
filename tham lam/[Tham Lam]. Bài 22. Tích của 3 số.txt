@@ -1,0 +1,104 @@
+Cho số nguyên dương N, nhiệm vụ của bạn là kiểm tra xem có thể viết N = a * b *
+c hay không, trong đó a, b, c là 3 số nguyên dương lớn hơn hoặc bằng 2 khác
+nhau.
+Input Format
+Dòng duy nhất chứa số nguyên dương N
+Constraints
+2<=N<=10^9
+Output Format
+In ra YES nếu có thể biểu diễn N dưới dạng tích của 3 số, ngược lại in ra NO
+
+Sample Input 0
+11
+Sample Output 0
+NO
+Sample Input 1
+24
+Sample Output 1
+YES
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+c1:
+bool ts(int n)
+{
+	set<int> d;
+	my_for(i,2,sqrt(n)+1)
+	{
+		if(n%i==0)
+		{
+			int tich=1;
+			while(n%i==0)
+			{
+				n/=i;
+				tich*=i;
+				if(d.count(tich)==0)
+				{
+					d.insert(tich);
+					tich=1;
+				}
+			}
+		}
+	}
+	if(n>1) 
+	{
+		if(d.count(n)==0) d.insert(n); 
+	}
+	foreach(x,d) cout<<x<<" ";
+	cout<<endl;
+	return d.size()>=3;
+}
+anonymous()
+{
+	vinh
+	int n;cin>>n;
+	if(ts(n)) cout<<"YES";
+	else cout<<"NO";
+}
+ c2:
+ #include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+bool ts(int n)
+{
+	int dem=0,mu=0;
+	my_for(i,2,sqrt(n)+1)
+	{
+		if(n%i==0)
+		{
+			dem+=1;
+			while(n%i==0)
+			{
+				mu+=1;
+				n/=i;
+			}
+		}
+	}
+	if(n>1) 
+	{
+		dem+=1;
+		mu+=1;
+	}
+	if(dem>=3) return true;
+	if(dem==2) return mu>=4;
+	if(dem==1) return mu>5;
+}
+anonymous()
+{
+	vinh
+	int n;cin>>n;
+	if(ts(n)) cout<<"YES";
+	else cout<<"NO";
+}

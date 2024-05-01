@@ -1,0 +1,52 @@
+Tí vào Tèo cùng chơi một trò chơi với xâu nhị phân S. Xâu nhị phân S chỉ bao gồm
+các kí tự 0 và 1. Ở mỗi bước đi, 2 bạn nhỏ có thể chọn 1 xâu con liên tiếp các kí
+tự giống nhau ở xâu S và xóa nó khỏi xâu S. Sau khi xóa 1 xâu thì 2 xâu bên trái
+và phải của xâu vừa xóa sẽ trở thành liền kề. Ban đầu Tí là người đi trước, sau đó
+2 bạn lần lượt thực hiện bước đi của mình cho tới khi xâu S trở thành xâu rỗng.
+Bạn hãy xác định xem Tí có thể xóa tối đa bao nhiêu kí tự 1 biết rằng cả 2 bạn
+đều chơi tối ưu
+Input Format
+Dòng duy nhất chứa xâu S
+Constraints
+1<=len(S)<=100000;
+Output Format
+In ra số lượng số 1 tối đa mà Tí có thể xóa được
+Sample Input 0
+1000101110011111
+Sample Output 0
+6
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+anonymous()
+{
+	vinh
+	string s;cin>>s;s+='0';
+	vector<int> d;
+	int dem=0;
+	my_for(i,0,s.size())
+	{
+		if(s[i]=='1')
+		{
+			dem+=1;
+		}
+		else
+		{
+			d.push_back(dem);
+			dem=0;
+		}
+	}
+	sort(d.begin(),d.end(),greater<int>());
+	int sum=0;
+	my_for(i,0,d.size())
+	{
+		if(i%2==0) sum+=d[i];
+	}
+	cout<<sum;
+}
