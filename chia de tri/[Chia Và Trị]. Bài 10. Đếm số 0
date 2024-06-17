@@ -1,0 +1,45 @@
+Cho mảng A[] gồm N phần tử chỉ bao gồm các số 0 và 1. Các số 0 được đặt trước các số 1. Hãy đếm các số 0 với thời gian log(N).
+Input Format
+Dòng 1 chứa số nguyên dương N; Dòng thứ 2 chứa N số nguyên của mảng A[]
+Constraints
+1<=N<=10^6; 0<=A[i]<=1;
+Output Format
+In ra đáp án của bài toán, nếu số 0 không xuất hiện in ra 0
+Sample Input 0
+6
+0 0 1 1 1 1 
+Sample Output 0
+2
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+int bs(int a[],int n)
+{
+	int l=0,r=n-1;
+	int pos=-1;
+	while(l<=r)
+	{
+		int m=(l+r)/2;
+		if(a[m]==0) 
+		{
+			pos=m;
+			l=m+1;
+		}
+		else r=m-1;
+	}
+	return pos;
+}
+anonymous()
+{
+	vinh
+	int n;cin>>n;
+	int a[n];
+	forEach(x,a) cin>>x;
+	cout<<bs(a,n)+1;
+}

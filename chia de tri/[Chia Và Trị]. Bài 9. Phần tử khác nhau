@@ -1,0 +1,45 @@
+Cho hai mảng đã được sắp xếp A[] và B[] gồm N và N-1 phần tử. Các phần tử của mảng A[] chỉ khác mảng B[] một phần tử duy nhất. Hãy tìm vị trí của phần tử khác nhau giữa A[] và B[].
+Input Format
+Dòng đầu chứa số nguyên dương N; Dòng thứ 2 chứa các phần tử của mảng A[]; Dòng thứ 3 chứa các phần tử của mảng B[];
+Constraints
+1<=N<=10^5; 1<=A[i], B[i]<=10^6;
+Output Format
+In ra đáp án của bài toán
+Sample Input 0
+8
+1 2 3 4 5 6 7 8 
+1 2 3 4 5 6 8 
+Sample Output 0
+7
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+int bs(int a[],int b[],int n)
+{
+	int l=0,r=n-2;
+	int pos=-1;
+	while(l<=r)
+	{
+		int m=(l+r)/2;
+		if(a[m]==b[m])
+		{
+			l=m+1;
+		}
+		else
+		{
+			pos=m;
+			r=m-1;
+		}
+	}
+	return pos;
+}
+anonymous()
+{
+	vinh
+}

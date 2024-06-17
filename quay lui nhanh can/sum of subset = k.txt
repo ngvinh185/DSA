@@ -51,8 +51,8 @@ void ql(int i,int pos,int sum)
 			my_for(l,1,i+1) 
 			{
 				a.push_back(x[l]);
-				sort(a.begin(),a.end());
 			}
+			sort(a.begin(),a.end());
 			d.push_back(a);	
 		}
 		else if(sum<k)

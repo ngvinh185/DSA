@@ -1,0 +1,58 @@
+Cho dãy số nguyên A[] gồm N phần tử, nhiệm vụ của bạn là tính tổng của dãy con có tổng lớn nhất.
+Input Format
+Dòng đầu tiên chứa số nguyên dương N; Dòng thứ 2 chứa N số nguyên của dãy A[]
+Constraints
+1<=N<=10^5; 1<=abs(A[i])<=10^6
+Output Format
+In ra đáp án của bài toán
+Sample Input 0
+5
+-3 6 1 -3 6 
+Sample Output 0
+10
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+int tong(int a[],int l,int r,int m)
+{
+	int s1=0,max_s1=-1e9;
+	int s2=0,max_s2=-1e9;
+	my_For(i,m,l) 
+	{
+		s1+=a[i];
+		max_s1=max(s1,max_s1);
+	}
+	my_for(i,m+1,r+1)
+	{
+		s2+=a[i];
+		max_s2=max(max_s2,s2);
+	}
+	return max_s1+max_s2;
+}
+int maxSum(int a[],int l,int r)
+{
+	if(l<r)
+	{
+		int m=(l+r)/2;
+		int s1=maxSum(a,l,m);
+		int s2=maxSum(a,m+1,r);
+		int s3=tong(a,l,r,m);
+		return max({s1,s2,s3});
+	}
+	else return a[l];
+}
+//nlogn
+anonymous()
+{
+	vinh
+	int n;cin>>n;
+	int a[n];
+	my_for(i,0,n) cin>>a[i];
+	cout<<maxSum(a,0,n-1);
+}

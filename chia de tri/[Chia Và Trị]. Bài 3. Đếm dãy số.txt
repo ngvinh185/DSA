@@ -1,0 +1,46 @@
+Cho số nguyên dương n, bạn được phép sử dụng không giới hạn các số tự nhiên từ 1 tới n. Hỏi có bao nhiêu cách chọn ra 1 dãy có tổng các phần tử bằng n.
+Input Format
+Dòng duy nhất chứa số nguyên dương n
+Constraints
+1<=n<=10^12
+Output Format
+In ra đáp án của bài toán sau khi chia dư với 10^9 + 7
+Sample Input 0
+6
+Sample Output 0
+32
+// chia keo euclid (n-1)C(k-1) voi k>=1
+//voi bai nay thi x1=n -> (k=1) = (n-1)C0
+//                x1+x2=n -> (k=2) = (n-1)C1
+//                x1+...+xn=n -> (k=n) = (n-1)C(n-1)
+//               =>> tong: (n-1)C0+(n-1)C1+.....+(n-1)C(n-1)=2^(n-1)
+
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+const int mod=1e9+7;
+using namespace std;
+
+int Mod(int a,int b)
+{
+	return ((a%mod)*(b%mod)) %mod;
+}
+int ltnp(int a,int b)
+{
+	if(b==0) return 1;
+	int x=ltnp(a,b/2);
+	if(b%2==0) return Mod(x,x);
+	else return Mod(x,Mod(x,a));
+}
+anonymous()
+{
+	vinh
+	int n;
+	cin>>n;
+	cout<<ltnp(2,n-1);
+}

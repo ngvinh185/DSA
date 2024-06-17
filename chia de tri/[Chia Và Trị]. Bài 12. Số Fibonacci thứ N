@@ -1,0 +1,61 @@
+Tìm số Fibonacci thứ N sau khi chia dư kết quả cho 10^9 + 7
+Input Format
+Dòng duy nhất chứa số nguyên dương N;
+Constraints
+1<=N<=10^10
+Output Format
+In ra đáp án của bài toán
+Sample Input 0
+58
+Sample Output 0
+286725742
+Sample Input 1
+36
+Sample Output 1
+14930352
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+using namespace std;
+struct matrix{
+	int f[2][2];
+};
+int mod=1e9+7;
+matrix operator * (matrix a,matrix b)
+{
+	matrix c;
+	my_for(i,0,2)
+	{
+		my_for(j,0,2)
+		{
+			c.f[i][j]=0;
+			my_for(k,0,2)
+			{
+				c.f[i][j]+=(a.f[i][k]%mod*b.f[k][j]%mod)%mod;
+				c.f[i][j]%=mod;
+			}
+		}
+	}
+	return c;
+}
+matrix powMod(matrix a,int n)
+{
+	if(n==1) return a;
+	matrix x=powMod(a,n/2);
+	if(n%2==0) return x*x;
+	else return a*x*x;
+}
+anonymous()
+{
+	vinh
+	int n;cin>>n;
+	matrix a;
+	a.f[0][1]=a.f[0][0]=a.f[1][0]=1;
+	a.f[1][1]=0;
+	cout<<powMod(a,n).f[1][0];
+}

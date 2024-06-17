@@ -1,0 +1,44 @@
+Nhiệm vụ của bạn là tính N^K, kết quả được chia dư với 10^9 + 7
+Input Format
+Dòng duy nhất chứa 2 số N và K
+Constraints
+1<=N<=10^6; 1<=K<=10^9;
+Output Format
+Kết quả của bài toán
+Sample Input 0
+9 9
+Sample Output 0
+387420489
+Sample Input 1
+994402 999992619
+Sample Output 1
+925329307
+#include <bits/stdc++.h>
+#define vinh ios::sync_with_stdio(false);cin.tie(nullptr);
+#define anonymous main
+#define int long long
+#define my_for(i,a,b) for(int i=a;i<b;i++)
+#define my_For(i,a,b) for(int i=a;i>=b;i--)
+#define foreach(x,a) for(auto x:a)
+#define forEach(x,a) for(auto &x:a)
+const int mod=1e9+7;
+using namespace std;
+
+int Mod(int a,int b)
+{
+	return ((a%mod)*(b%mod)) %mod;
+}
+int ltnp(int a,int b)
+{
+	if(b==0) return 1;
+	int x=ltnp(a,b/2);
+	if(b%2==0) return Mod(x,x);
+	else return Mod(x,Mod(x,a));
+}
+anonymous()
+{
+	vinh
+	int a,b;
+	cin>>a>>b;
+	cout<<ltnp(a,b);
+}
